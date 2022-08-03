@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 // components
@@ -9,16 +10,23 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 
 function App() {
+
+  // state
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [token, setToken] = useState('');
+  const [loggedin, setLoggedin] = useState(true);
+
   return (
     <>
       <Header />
       <main style={{ 'minHeight': '80vh' }}>
         <Routes>
-          <Route path="/*" element={<PrivateRoute />} >
+          <Route path="/*" element={<PrivateRoute loggedin={loggedin} />} >
             <Route path="home" element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="logout" element={<Logout />} />
+            <Route path="logout" element={<Logout setToken={setToken} />} />
           </Route>
+          <Route path="login" element={<Login email={email} setEmail={setEmail} password={password} setPassword={setPassword} setToken={setToken} />} />
         </Routes>
       </main>
       <Footer />
