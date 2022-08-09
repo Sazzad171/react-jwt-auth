@@ -8,7 +8,7 @@ export default function Logout({ setToken }) {
   useEffect(() => {
     localStorage.clear();
     setToken('');
-    navigate("/home", {replace: true});
+    navigate("/", {replace: true});
   })
 
   return (
