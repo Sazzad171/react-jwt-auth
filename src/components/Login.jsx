@@ -23,7 +23,13 @@ export default function Login({ email, setEmail, password, setPassword, setToken
       .then((res) => {
         console.log(res.data);
         setToken(res.data.access_token);
-        localStorage.setItem('access_token', res.data.access_token);
+
+        const userInfo = {
+          access_token: res.data.access_token,
+          id: Math.random()
+        }
+
+        localStorage.setItem('access_token', JSON.stringify(userInfo));
         setEmail('');
         setPassword('');
         navigate("/home", { replace: true });
