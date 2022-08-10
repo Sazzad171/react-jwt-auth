@@ -8,6 +8,9 @@ export default function Header() {
       <div className="container">
       <ListGroup horizontal className='justify-content-center'>
         <ListGroup.Item>
+          <Link to="/">Root</Link>
+        </ListGroup.Item>
+        <ListGroup.Item>
           <Link to="home">Home</Link>
         </ListGroup.Item>
         <ListGroup.Item>

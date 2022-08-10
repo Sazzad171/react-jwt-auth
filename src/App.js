@@ -16,7 +16,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [token, setToken] = useState('');
-  const [loggedin, setLoggedin] = useState(true);
+  const [loggedin, setLoggedin] = useState(false);
 
   return (
     <>
@@ -26,9 +26,10 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/*" element={<PrivateRoute loggedin={loggedin} />} >
             <Route path="home" element={<Home />} />
-            <Route path="logout" element={<Logout setToken={setToken} />} />
+            <Route path="logout" element={<Logout setToken={setToken} setLoggedin={setLoggedin} />} />
           </Route>
-          <Route path="login" element={<Login email={email} setEmail={setEmail} password={password} setPassword={setPassword} setToken={setToken} />} />
+          <Route path="login" element={<Login email={email} setEmail={setEmail} password={password}
+             setPassword={setPassword} setToken={setToken} loggedin={loggedin} setLoggedin={setLoggedin} />} />
         </Routes>
       </main>
       <Footer />

@@ -1,8 +1,8 @@
 import { Form } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import axios from 'axios';
 
-export default function Login({ email, setEmail, password, setPassword, setToken }) {
+export default function Login({ email, setEmail, password, setPassword, setToken, loggedin, setLoggedin }) {
 
   let navigate = useNavigate();
 
@@ -23,8 +23,9 @@ export default function Login({ email, setEmail, password, setPassword, setToken
       .then((res) => {
         console.log(res.data);
         setToken(res.data.access_token);
+        setLoggedin(true);
 
-        const userInfo = {
+        let userInfo = {
           access_token: res.data.access_token,
           id: Math.random()
         }
@@ -41,7 +42,7 @@ export default function Login({ email, setEmail, password, setPassword, setToken
     }
   }
 
-  return (
+  return !loggedin ? (
     <section className='py-5'>
       <div className="container h-100">
         <div className="row align-items-center justify-content-center h-100">
@@ -64,5 +65,7 @@ export default function Login({ email, setEmail, password, setPassword, setToken
         </div>
       </div>
     </section>
+  ) : (
+    <Navigate to="/home" />
   )
 }
