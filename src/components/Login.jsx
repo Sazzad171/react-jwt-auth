@@ -2,27 +2,21 @@ import { Form } from 'react-bootstrap';
 import { useNavigate, Navigate } from 'react-router-dom';
 import axios from 'axios';
 
-export default function Login({ email, setEmail, password, setPassword, setToken, loggedin, setLoggedin }) {
+export default function Login({ email, setEmail, password, setPassword, loggedin, setLoggedin }) {
 
   let navigate = useNavigate();
 
   // on form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // inputted data
+    let data = {"email": email, "password": password}
     
     try {
-      await axios({
-        url: "http://localhost:8000/auth/login",
-        method: "POST",
-        headers: {
-          authorization: "Bearer " + setToken
-        },
-
-        data: {"email": email, "password": password}
-      })
+      await axios.post("http://localhost:8000/auth/login", data)
       .then((res) => {
         console.log(res.data);
-        setToken(res.data.access_token);
         setLoggedin(true);
 
         let userInfo = {
@@ -30,7 +24,7 @@ export default function Login({ email, setEmail, password, setPassword, setToken
           id: Math.random()
         }
 
-        localStorage.setItem('access_token', JSON.stringify(userInfo));
+        localStorage.setItem('user_info', JSON.stringify(userInfo));
         setEmail('');
         setPassword('');
         navigate("/home", { replace: true });

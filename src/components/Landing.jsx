@@ -1,7 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 export default function Landing() {
   return (
-    <div>Landing</div>
+    <section>
+      <div className="container">
+        <h1 className="text-center">This is landing page</h1>
+      </div>
+    </section>
   )
 }
